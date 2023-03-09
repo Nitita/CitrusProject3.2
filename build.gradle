@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //compile("com.consol.citrus:citrus-db-driver:0.1.4")
+    //compile("com.consol.citrus:citrus-jdbc:3.2.0")
+    //compile("com.oracle.jdbc:com.springsource.oracle.jdbc:10.2.0.2")
+    //testCompile("org.hsqldb:hsqldb:2.4.0")
+
+    implementation 'com.consol.citrus:citrus-endpoint-catalog:3.2.0'
+    testImplementation 'org.springframework:spring-test:5.3.15'
+
+
+    //compile("org.springframework:spring-test:5.3.15")
+    compile("com.consol.citrus:citrus-http:3.2.0")
+    testCompile ("com.consol.citrus:citrus-validation-xml:3.2.0")
+    testCompile ("com.consol.citrus:citrus-validation-json:3.2.0")
+    testCompile ("com.consol.citrus:citrus-validation-text:3.2.0")
+    testCompile ("com.consol.citrus:citrus-validation-hamcrest:3.2.0")
+    testCompile("com.consol.citrus:citrus-base:3.2.0")
+    testCompile("com.consol.citrus:citrus-spring:3.2.0")
+    testCompile("com.consol.citrus:citrus-testng:3.2.0")
+
+    //testCompile("org.testng:testng:6.14.3")
+
+    testCompile("org.slf4j:jcl-over-slf4j:1.7.25")
+    testCompile("org.slf4j:slf4j-log4j12:1.7.25")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.12")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.12")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.10.5")
+}
+
+test {
+    jvmArgs '-Duser.country=en', '-Duser.language=en', '-Dfile.encoding=UTF-8'
+    useTestNG() {
+        suites 'src/test/resources/test-suites.xml'
+
+    }
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+        showStandardStreams = true
+        exceptionFormat = 'full'
+    }
+    test.outputs.upToDateWhen {false}
+    options.listeners << 'autotests.ParallelClassesReporter'
+}
