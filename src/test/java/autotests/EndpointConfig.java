@@ -1,29 +1,27 @@
 package autotests;
 
-
-import java.util.Collections;
-
 import com.consol.citrus.dsl.endpoint.CitrusEndpoints;
 import com.consol.citrus.http.client.HttpClient;
-import com.consol.citrus.http.client.HttpClientBuilder;
 import com.consol.citrus.xml.namespace.NamespaceContextBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.http.HttpMethod;
+import java.util.Collections;
 
 
-@Import(BaseTest.class)
 @Configuration
+@RequiredArgsConstructor
 public class EndpointConfig {
+
+    private final AppConfig appConfig;
 
     @Bean("PetStoreClient")
     public HttpClient PetStoreClient() {
         return CitrusEndpoints
                 .http()
                 .client()
-                .requestUrl("https://petstore.swagger.io")
+                .requestUrl(appConfig.getStoreUrl() + appConfig.getBasePath())
                 .build();
     }
 

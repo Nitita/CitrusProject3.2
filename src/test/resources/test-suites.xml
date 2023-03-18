@@ -1,11 +1,8 @@
 <suite name="suite" parallel="classes" thread-count="4">
-    <listeners>
-        <listener class-name="autotests.ParallelClassesReporter" />
-    </listeners>
     <test name="test" >
         <classes>
-            <class name="autotests.StoreTests"/>
-            <class name="autotests.Store2Tests"/>
+            <class name="autotests.samples.StoreTests"/>
+            <class name="autotests.samples.StoreTests"/>
         </classes>
     </test>
 </suite>

@@ -1,5 +1,6 @@
-package autotests;
+package autotests.samples;
 
+import autotests.BaseTest;
 import com.consol.citrus.TestActionRunner;
 import com.consol.citrus.annotations.CitrusResource;
 import com.consol.citrus.annotations.CitrusTest;
@@ -16,9 +17,9 @@ import static com.consol.citrus.validation.json.JsonPathMessageValidationContext
 
 public class StoreTests extends BaseTest {
 
-    String pathRequest = "/v2/store/order";
+    String pathRequest = "/store/order";
 
-    @Test(invocationCount = 1)
+    @Test(description = "описание теста")
     @CitrusTest
     public void testOrder1(@Optional @CitrusResource TestActionRunner actions) {
 
@@ -45,12 +46,12 @@ public class StoreTests extends BaseTest {
                 .message()
                 .type(MessageType.JSON)
                 .validate(jsonPath()
-                        .expression("$.petId", "1")
-                        .expression("$.petId", "123")
-                        .expression("$.quantity", "456")
-                        .expression("$.shipDate", "2023-02-10T00:00:00.000+0000")
-                        .expression("$.status", "work")
-                        .expression("$.complete", "true")));
+                        .expression("id", "1")
+                        .expression("petId", "123")
+                        .expression("quantity", "456")
+                        .expression("shipDate", "2023-02-10T00:00:00.000+0000")
+                        .expression("status", "work")
+                        .expression("complete", "true")));
     }
 
     @Test

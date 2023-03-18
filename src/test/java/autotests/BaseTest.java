@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 
 import static com.consol.citrus.http.actions.HttpActionBuilder.http;
 
+@ContextConfiguration(classes = {EndpointConfig.class, AppConfig.class})
 
 public class BaseTest extends TestNGCitrusSpringSupport {
 
@@ -22,6 +24,9 @@ public class BaseTest extends TestNGCitrusSpringSupport {
 
     @Autowired
     protected ObjectMapper objectMapper;
+
+    @Autowired
+    protected HttpClient duckClient;
 
 
     //Функция для отправки POST запросов с телом json сформированным в тесте динамически

@@ -1,5 +1,6 @@
-package autotests;
+package autotests.samples;
 
+import autotests.BaseTest;
 import com.consol.citrus.TestActionRunner;
 import com.consol.citrus.annotations.CitrusResource;
 import com.consol.citrus.annotations.CitrusTest;
@@ -7,9 +8,6 @@ import com.consol.citrus.context.TestContext;
 import com.consol.citrus.message.MessageType;
 import com.consol.citrus.message.builder.ObjectMappingPayloadBuilder;
 import com.consol.citrus.validation.json.JsonMappingValidationProcessor;
-import static com.consol.citrus.dsl.MessageSupport.MessageHeaderSupport.fromHeaders;
-import static com.consol.citrus.dsl.MessageSupport.MessageBodySupport.fromBody;
-//import static com.consol.citrus.dsl.JsonPathSupport.jsonPath;
 import model.Order;
 import model.OrderRes;
 import org.springframework.http.HttpStatus;
@@ -20,14 +18,18 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
-import static com.consol.citrus.http.actions.HttpActionBuilder.http;
 import static com.consol.citrus.actions.EchoAction.Builder.echo;
+import static com.consol.citrus.dsl.MessageSupport.MessageBodySupport.fromBody;
+import static com.consol.citrus.dsl.MessageSupport.MessageHeaderSupport.fromHeaders;
+import static com.consol.citrus.http.actions.HttpActionBuilder.http;
 import static com.consol.citrus.validation.json.JsonPathMessageValidationContext.Builder.jsonPath;
 import static org.hamcrest.Matchers.containsString;
 
+//import static com.consol.citrus.dsl.JsonPathSupport.jsonPath;
+
 public class Store2Tests extends BaseTest {
 
-    String pathRequest = "/v2/store/order";
+    String pathRequest = "/store/order";
 
     @Test
     @CitrusTest
@@ -97,15 +99,15 @@ public class Store2Tests extends BaseTest {
                         .message()
                         .name("OrderRes")
                         .type(MessageType.JSON)
-                .extract(fromHeaders()
-                                .expression("Content-Type", "${authVar}"))
-                .extract(fromBody()
-                                .expression("$.quantity", "${quantityVar}"))
+                        .extract(fromHeaders()
+                                        .expression("Content-Type", "${authVar}"))
+                        .extract(fromBody()
+                                        .expression("$.quantity", "${quantityVar}"))
         );
 
         actions.$(echo("Переменная из заголовка  ${quantityVar}"));
 
-        actions.$(echo("Переменная из заголовка  ${authVar}"));
+        actions.$(echo("Переменная из тела  ${authVar}"));
     }
 
     @Test
