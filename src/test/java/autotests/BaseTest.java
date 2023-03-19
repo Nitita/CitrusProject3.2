@@ -25,9 +25,6 @@ public class BaseTest extends TestNGCitrusSpringSupport {
     @Autowired
     protected ObjectMapper objectMapper;
 
-    @Autowired
-    protected HttpClient duckClient;
-
 
     //Функция для отправки POST запросов с телом json сформированным в тесте динамически
     public void sendPostRequest(TestActionRunner actions, String path, Object userData) {

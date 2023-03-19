@@ -1,8 +1,9 @@
 <suite name="suite" parallel="classes" thread-count="4">
     <test name="test" >
         <classes>
-            <class name="autotests.samples.StoreTests"/>
-            <class name="autotests.samples.StoreTests"/>
+            <class name="autotests.samples.ObjectMapperTests"/>
+            <class name="autotests.samples.FinishTests"/>
+            <class name="autotests.samples.FirstTests"/>
         </classes>
     </test>
 </suite>
